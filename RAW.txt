@@ -1,0 +1,64 @@
+Microsoft Windows [Version 10.0.22631.3374]
+(c) Microsoft Corporation. All rights reserved.
+
+C:\Users\{redacted}>ollama run codegemma
+pulling manifest
+pulling 7cb8cb805c53... 100% ▕████████████████████████████████████████████████████████▏ 5.0 GB
+pulling 097a36493f71... 100% ▕████████████████████████████████████████████████████████▏ 8.4 KB
+pulling 109037bec39c... 100% ▕████████████████████████████████████████████████████████▏  136 B
+pulling 65bb16cf5983... 100% ▕████████████████████████████████████████████████████████▏  109 B
+pulling 7cb95312d449... 100% ▕████████████████████████████████████████████████████████▏  483 B
+verifying sha256 digest
+writing manifest
+removing any unused layers
+success
+>>> i need a program that can be run from a shortcut. when run the program displays a button with the lable "cake?" when
+...  pressed a picture of cake is generated or retrieved from an api call.
+```python
+import tkinter as tk
+from PIL import ImageTk, Image
+import requests
+
+# Create a window
+window = tk.Tk()
+window.title("Cake Time")
+
+# Create a button
+button = tk.Button(window, text="cake?")
+button.pack()
+
+# Create an empty label to display the image
+image_label = tk.Label(window)
+image_label.pack()
+
+# Define a function to generate or retrieve a cake image
+def generate_cake():
+    # Get a random cake image from an API call
+    response = requests.get("https://api.giphy.com/v1/gifs/random?api_key=YOUR_API_KEY")
+    image_url = response.json()["data"]["images"]["original"]["url"]
+
+    # Create an Image object from the URL
+    image = Image.open(requests.get(image_url, stream=True).raw)
+
+    # Create an ImageTk object from the Image object
+    image_tk = ImageTk.PhotoImage(image)
+
+    # Display the image in the label
+    image_label.configure(image=image_tk)
+    image_label.image = image_tk
+
+# Bind the button to the generate_cake function
+button.bind("<Button-1>", lambda event: generate_cake())
+
+# Run the window
+window.mainloop()
+```
+
+**Notes:**
+
+* Replace `YOUR_API_KEY` with your actual Giphy API key.
+* The program uses the Giphy API to retrieve a random cake image.
+* The `ImageTk.PhotoImage` object is used to display the image in the tkinter window.
+* The `bind()` method is used to associate the button press event with the `generate_cake()` function.
+* When the button is pressed, the `generate_cake()` function is called, which retrieves an image from the API and
+displays it in the window.
