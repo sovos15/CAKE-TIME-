@@ -1,5 +1,5 @@
 # CAKE-TIME-
-one shot prompt2program with code gemma
+one shot prompt2program with CodeGemma using [Ollama](ollama.com)
 
 ![Screenshot 2024-04-10 092940](https://github.com/sovos15/CAKE-TIME-/assets/30919290/8e3fe31c-307b-4bec-9bae-5a04462580e9)
 
